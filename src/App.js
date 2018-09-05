@@ -29,12 +29,12 @@ class App extends Component {
         </p>
         <h2>Immutable</h2>
         <p className="App-intro">
-          Name: {immutable.name}, <br/>
-          Location: {immutable.location}, <br/>
-          Foo: {immutable.foo.bar}, <br/>
-          Baz: {immutable.foo.baz}, <br/>
+          Name: {immutable.get('name')}, <br/>
+          Location: {immutable.get('location')}, <br/>
+          Foo: {immutable.getIn(['foo','bar'])}, <br/>
+          Baz: {immutable.getIn(['foo','baz'])}, <br/>
           list: {
-            immutable.list.map((val) => {
+            immutable.get('list').map((val) => {
               return (<span key={val}>{val}</span>)
             })
           }
