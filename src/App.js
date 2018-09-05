@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
-import { setMutableName, updateMutableDeep } from './redux/actions/actions';
+import { setMutableName, updateMutableDeep, setImmutableName, updateImmutableDeep } from './redux/actions/actions';
 
 class App extends Component {
 
   render() {
     console.log('render again!');
-    const {mutable} = this.props;
+    const {mutable, immutable} = this.props;
     return (
       <div className="App">
         <header className="App-header">
@@ -27,8 +27,22 @@ class App extends Component {
             })
           }
         </p>
+        <h2>Immutable</h2>
+        <p className="App-intro">
+          Name: {immutable.name}, <br/>
+          Location: {immutable.location}, <br/>
+          Foo: {immutable.foo.bar}, <br/>
+          Baz: {immutable.foo.baz}, <br/>
+          list: {
+            immutable.list.map((val) => {
+              return (<span key={val}>{val}</span>)
+            })
+          }
+        </p>
         <button onClick={this.props.setMutableName}>Set Name - Mutable</button>
         <button onClick={this.props.updateMutableDeep}>Update Deep - Mutable</button>
+        <button onClick={this.props.setImmutableName}>Set Name - Immutable</button>
+        <button onClick={this.props.updateImmutableDeep}>Update Deep - Immutable</button>
       </div>
     );
   }
@@ -36,12 +50,15 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   mutable: state.mutable,
+  immutable: state.immutable,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
       setMutableName: (evt) => dispatch(setMutableName('Mutable Daniel')),
       updateMutableDeep: (evt) => dispatch(updateMutableDeep('Mutable Deep bar')),
+      setImmutableName: (evt) => dispatch(setImmutableName('Immutable Daniel')),
+      updateImmutableDeep: (evt) => dispatch(updateImmutableDeep('Immutable Deep bar')),
   };
 }
 

@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     const { type, payload } = action;
     switch (type) {
-        case USER.MUTABLE_UPDATE_DEEP:
+        case USER.IMMUTABLE_UPDATE_DEEP:
             return {
                 ...state,
                 foo: {
@@ -21,7 +21,7 @@ export default (state = INITIAL_STATE, action) => {
                     bar: payload,
                 }
             }
-        case USER.MUTABLE_SET_NAME:
+        case USER.IMMUTABLE_SET_NAME:
             return { ...state, name: payload }
         default:
             return state;
