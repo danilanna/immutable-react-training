@@ -1,12 +1,12 @@
 import { USER } from './types';
 
-export const updateMutableDeep = payload => ({
-    type: USER.MUTABLE_UPDATE_DEEP,
+export const updateVanillaDeep = payload => ({
+    type: USER.VANILLA_UPDATE_DEEP,
     payload
 });
 
-export const setMutableName = payload => ({
-    type: USER.MUTABLE_SET_NAME,
+export const setVanillaName = payload => ({
+    type: USER.VANILLA_SET_NAME,
     payload
 });
 

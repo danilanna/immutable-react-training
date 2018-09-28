@@ -1,7 +1,7 @@
 import { USER } from '../actions/types';
-import * as Immutable from 'immutable';
+import { fromJS } from 'immutable';
 
-const INITIAL_STATE = Immutable.fromJS({
+const INITIAL_STATE = fromJS({
     name: 'Daniel',
     location: 'Brazil',
     foo: {
