@@ -1,5 +1,5 @@
 // Code 1 - PRIMITIVES - IMMUTABLE
-const foo = 1;
+let foo = 1;
 const bar = foo;
 console.log(foo === bar); // true
 foo = 2;
@@ -32,19 +32,23 @@ console.log(bar); // {baz: 2}
 
 // Code 5 OBJECTS - MUTABLE PROBLEM - DEEP OBJECTS
 const foo = {some: {deep: {object: 1}}};
+console.log(foo); // 1
 const bar = Object.assign({}, foo);
 //const bar = {...foo};
 console.log(foo === bar); // false - is a new object
 console.log(foo.some === bar.some); // true - is the same reference
 console.log(foo.some.deep === bar.some.deep); // true - is the same reference
 console.log(foo.some.deep.object === bar.some.deep.object); // true - is the same reference
-
 // both values changed
 foo.some.deep.object = 2;
-
+console.log(foo.some.deep.object); // 2
+console.log(bar.some.deep.object); // 2
+console.log(foo); // 2
+console.log(bar); // 2
 
 // Code 6 OBJECTS - MUTABLE PROBLEM SOLVED - DEEP OBJECTS
 const foo = {some: {deep: {object: 1}}};
+console.log(foo); // 1
 const bar = Object.assign({}, foo, {
     some: Object.assign({}, foo.some, {
         deep: Object.assign({}, foo.some.deep, {
@@ -56,9 +60,14 @@ console.log(foo === bar); // false - is a new object
 console.log(foo.some === bar.some); // false - is a new object
 console.log(foo.some.deep === bar.some.deep); // false - is a new object
 console.log(foo.some.deep.object === bar.some.deep.object); // false - is a new object
+console.log(foo.some.deep.object); // 1
+console.log(bar.some.deep.object); // 2
+console.log(foo); // 1
+console.log(bar); // 2
 
 // SAME ABOVE BUT WITH SPREAD OPERATOR
 const foo = {some: {deep: {object: 1}}};
+console.log(foo); // 1
 const bar  = {
     ...foo,
     some: {
@@ -73,7 +82,10 @@ console.log(foo === bar); // false - is a new object
 console.log(foo.some === bar.some); // false - is a new object
 console.log(foo.some.deep === bar.some.deep); // false - is a new object
 console.log(foo.some.deep.object === bar.some.deep.object); // false - is a new object
-
+console.log(foo.some.deep.object); // 1
+console.log(bar.some.deep.object); // 2
+console.log(foo); // 1
+console.log(bar); // 2
 
 // IMMUTABLEJS DIFFERENCE
 const foo = {some: {deep: {object: 1}}};
