@@ -12,13 +12,17 @@ class App extends Component {
     const {immutable} = this.props;
     return (
       <div className="App">
+        
         <header className="App-header">
           <img src={img} className="App-logo" alt="logo" />
         </header>
+        
+        <h1>AC Lunch & Learn</h1>
+
         <h2>Vanilla JS</h2>
-        <p className="App-intro">
+        
+        <article className="App-intro">
           Name: {vanilla.name}, <br/>
-          Location: {vanilla.location}, <br/>
           Foo-Bar: {vanilla.foo.bar}, <br/>
           Foo-Baz: {vanilla.foo.baz}, <br/>
           list: {
@@ -26,11 +30,12 @@ class App extends Component {
               return (<span key={val}>{val}</span>)
             })
           }
-        </p>
+        </article>
+        
         <h2>Immutable.js</h2>
-        <p className="App-intro">
+        
+        <article className="App-intro">
           Name: {immutable.get('name')}, <br/>
-          Location: {immutable.get('location')}, <br/>
           Foo-Bar: {immutable.getIn(['foo', 'bar'])}, <br/>
           Foo-Baz: {immutable.getIn(['foo', 'baz'])}, <br/>
           list: {
@@ -38,7 +43,8 @@ class App extends Component {
               return (<span key={val}>{val}</span>)
             })
           }
-        </p>
+        </article>
+        
         <button onClick={this.props.setVanillaName}>Set Name - Vanilla</button>
         <button onClick={this.props.updateVanillaDeep}>Update - Vanilla</button>
         <button onClick={this.props.setImmutableName}>Set Name - Immutable</button>

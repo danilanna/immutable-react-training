@@ -107,3 +107,62 @@ const newImmutable = immutable.setIn(['some', 'deep', 'object'], 1);
 
 // IF YOU DO NOT CHANGE ANY VALUE, THE OBJECT STILL THE SAME
 console.log(newImmutable === immutable); // true
+
+
+
+//IMMUTABLE.JS
+// GET
+import { fromJS } from 'immutable';
+
+const object = { some: 'value' };
+
+// Get value using normal Javascript
+console.log(object.some); // value
+console.log(object.value); // undefined
+
+const immutableObj = fromJS(object);
+
+// Using ImmutableJs
+console.log(immutableObj.get('some')); // value
+console.log(immutableObj.get('nested')); // undefined
+
+
+//Deep Object
+
+const deepObject = { some: { deep: { object: 'value' } } };
+
+// Get value using normal Javascript
+console.log(deepObject.some.deep.object); // value
+console.log(deepObject.some.nested.object); // throws error: 'Cannot read object of undefined'
+
+const immutableDeepObj = fromJS(deepObject);
+
+// Using ImmutableJs
+console.log(immutableDeepObj.getIn(['some', 'deep', 'object'])); // value
+console.log(immutableDeepObj.getIn(['some', 'nested', 'object'])); // undefined - no error thrown
+
+// SET
+import { fromJS } from 'immutable';
+
+const object = { some: 'value' };
+
+// Set value using normal Javascript
+object.some = 'changed';
+
+const immutableObj = fromJS(object);
+
+// Using ImmutableJs
+immutableObj.set('some', 'changed');
+
+
+//Deep Object
+
+const deepObject = { some: { deep: { object: 'value' } } };
+
+// Set value using normal Javascript
+deepObject.some.deep.object = 'changed';
+
+const immutableDeepObj = fromJS(deepObject);
+
+// Using ImmutableJs
+immutableDeepObj.setIn(['some', 'deep', 'object'], 'changed');

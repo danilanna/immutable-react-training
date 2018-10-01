@@ -3,10 +3,9 @@ import { fromJS } from 'immutable';
 
 const INITIAL_STATE = fromJS({
     name: 'Daniel',
-    location: 'Brazil',
     foo: {
-        bar: 'bar',
-        baz: 'baz',
+        bar: 'bar value',
+        baz: 'baz value',
     },
     list: [ 1, 2, 3, 4, 5 ]
 });

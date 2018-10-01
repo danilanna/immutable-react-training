@@ -2,7 +2,6 @@ import { USER } from '../actions/types';
 
 const INITIAL_STATE = {
     name: 'Daniel',
-    location: 'Brazil',
     foo: {
         bar: 'bar value',
         baz: 'baz value',
