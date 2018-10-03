@@ -7,48 +7,48 @@ console.log(foo); // 2
 console.log(bar); // 1
 
 // Code 2 - OBJECTS - MUTABLE PROBLEM - BOTH OBJECTS CHANGED
-const foo = {baz: 1};
+const foo = {value: 1};
 const bar = foo;
 console.log(foo === bar); // true
-foo.baz = 2;
-console.log(foo); // {baz: 2}
-console.log(bar); // {baz: 2}
+foo.value = 2;
+console.log(foo); // {value: 2}
+console.log(bar); // {value: 2}
 
 // Code 3 - OBJECTS - MUTABLE PROBLEM SOLVED - OBJECT.ASSIGN
-const foo = {baz: 1};
-const bar = Object.assign({}, foo, {baz: 2});
+const foo = {value: 1};
+const bar = Object.assign({}, foo, {value: 2});
 console.log(foo === bar); // false
-foo.baz = 3;
-console.log(foo); // {baz: 3}
-console.log(bar); // {baz: 2}
+foo.value = 3;
+console.log(foo); // {value: 3}
+console.log(bar); // {value: 2}
 
 // Code 4 - OBJECTS - MUTABLE PROBLEM SOLVED - SPREAD OPERATOR
-const foo = {baz: 1};
-const bar = {...foo, baz: 2};
+const foo = {value: 1};
+const bar = {...foo, value: 2};
 console.log(foo === bar); // false
-foo.baz = 3;
-console.log(foo); // {baz: 3}
-console.log(bar); // {baz: 2}
+foo.value = 3;
+console.log(foo); // {value: 3}
+console.log(bar); // {value: 2}
 
 // Code 5 OBJECTS - MUTABLE PROBLEM - DEEP OBJECTS
 const foo = {some: {deep: {object: 1}}};
-console.log(foo); // 1
 const bar = Object.assign({}, foo);
-//const bar = {...foo};
-console.log(foo === bar); // false - is a new object
-console.log(foo.some === bar.some); // true - is the same reference
-console.log(foo.some.deep === bar.some.deep); // true - is the same reference
-console.log(foo.some.deep.object === bar.some.deep.object); // true - is the same reference
-// both values changed
+
+console.log(foo === bar); // false - it's a new object
+console.log(foo.some === bar.some); // true - it's the same reference
+console.log(foo.some.deep === bar.some.deep); // true - it's the same reference
+console.log(foo.some.deep.object === bar.some.deep.object); // true - it's the same reference
+
 foo.some.deep.object = 2;
+
 console.log(foo.some.deep.object); // 2
 console.log(bar.some.deep.object); // 2
+
 console.log(foo); // 2
-console.log(bar); // 2
+console.log(bar); // 2//const bar = {...foo};
 
 // Code 6 OBJECTS - MUTABLE PROBLEM SOLVED - DEEP OBJECTS
 const foo = {some: {deep: {object: 1}}};
-console.log(foo); // 1
 const bar = Object.assign({}, foo, {
     some: Object.assign({}, foo.some, {
         deep: Object.assign({}, foo.some.deep, {
@@ -56,18 +56,20 @@ const bar = Object.assign({}, foo, {
             })
         })
     });
-console.log(foo === bar); // false - is a new object
-console.log(foo.some === bar.some); // false - is a new object
-console.log(foo.some.deep === bar.some.deep); // false - is a new object
-console.log(foo.some.deep.object === bar.some.deep.object); // false - is a new object
+
+// false - it's a new object
+console.log(foo === bar);
+console.log(foo.some === bar.some);
+console.log(foo.some.deep === bar.some.deep);
+console.log(foo.some.deep.object === bar.some.deep.object);
 console.log(foo.some.deep.object); // 1
 console.log(bar.some.deep.object); // 2
+
 console.log(foo); // 1
 console.log(bar); // 2
 
 // SAME ABOVE BUT WITH SPREAD OPERATOR
 const foo = {some: {deep: {object: 1}}};
-console.log(foo); // 1
 const bar  = {
     ...foo,
     some: {
@@ -78,10 +80,11 @@ const bar  = {
         },
     }
 }
-console.log(foo === bar); // false - is a new object
-console.log(foo.some === bar.some); // false - is a new object
-console.log(foo.some.deep === bar.some.deep); // false - is a new object
-console.log(foo.some.deep.object === bar.some.deep.object); // false - is a new object
+// false - it's a new object
+console.log(foo === bar);
+console.log(foo.some === bar.some);
+console.log(foo.some.deep === bar.some.deep);
+console.log(foo.some.deep.object === bar.some.deep.object);
 console.log(foo.some.deep.object); // 1
 console.log(bar.some.deep.object); // 2
 console.log(foo); // 1
@@ -89,7 +92,6 @@ console.log(bar); // 2
 
 // IMMUTABLEJS DIFFERENCE
 const foo = {some: {deep: {object: 1}}};
-const immutable = Immutable.fromJS(foo);
 const bar  = {
     ...foo,
     some: {
@@ -103,9 +105,10 @@ const bar  = {
 // IF YOU DO NOT CHANGE ANY VALUE, A NEW OBJECT WILL BE CREATED ANYWAY
 console.log(foo === bar); // false
 
+const immutable = Immutable.fromJS(foo);
 const newImmutable = immutable.setIn(['some', 'deep', 'object'], 1);
 
-// IF YOU DO NOT CHANGE ANY VALUE, THE OBJECT STILL THE SAME
+// IF YOU DO NOT CHANGE ANY VALUE, THE OBJECT STILL BE THE SAME
 console.log(newImmutable === immutable); // true
 
 
