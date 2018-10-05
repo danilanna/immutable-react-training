@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actionCreators from '../redux/actions/mutableActions';
+import * as actionCreators from '../redux/actions/vanillaActions';
 import TodoList from '../components/TodoList'
 import TodoHeader from '../components/TodoHeader'
 import TodoTools from '../components/TodoTools'
@@ -22,10 +22,10 @@ class TodoApp extends Component {
 
 function mapStateToProps(state) {
   return {
-    todos: state.mutable.todos,
-    filter: state.mutable.filter,
-    actives: state.mutable.actives
+    todos: state.vanilla.todos,
+    filter: state.vanilla.filter,
+    actives: state.vanilla.actives
   };
 }
 
-export const MutableTodoAppContainer = connect(mapStateToProps, actionCreators)(TodoApp);
+export const VanillaTodoAppContainer = connect(mapStateToProps, actionCreators)(TodoApp);

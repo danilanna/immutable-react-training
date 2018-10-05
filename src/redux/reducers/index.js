@@ -1,7 +1,7 @@
 import ImmutableTodosReducer from "./ImmutableTodosReducer";
-import MutableTodosReducer from "./MutableTodosReducer";
+import VanillaTodosReducer from "./VanillaTodosReducer";
 
 export default {
   immutable: ImmutableTodosReducer,
-  mutable: MutableTodosReducer,
+  vanilla: VanillaTodosReducer,
 };

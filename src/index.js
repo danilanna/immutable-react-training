@@ -5,14 +5,14 @@ import 'todomvc-app-css/index.css';
 import registerServiceWorker from './registerServiceWorker';
 import store from './redux/store';
 import { ImmutableTodoAppContainer } from './containers/ImmutableTodoAppContainer';
-import { MutableTodoAppContainer } from './containers/MutableTodoAppContainer';
+import { VanillaTodoAppContainer } from './containers/VanillaTodoAppContainer';
 
 ReactDOM.render(
     <Provider store={store}>
         <div>
             {
-                window.location.pathname === '/mutable' 
-                ? <MutableTodoAppContainer></MutableTodoAppContainer>
+                window.location.pathname === '/vanilla' 
+                ? <VanillaTodoAppContainer></VanillaTodoAppContainer>
                 : <ImmutableTodoAppContainer></ImmutableTodoAppContainer>
             }
         </div>

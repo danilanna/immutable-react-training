@@ -1,10 +1,10 @@
-import { TODOS } from '../actions/mutableTypes';
+import { TODOS } from '../actions/vanillaTypes';
 
 const INITIAL_STATE = {
   todos: [
     { id: 1, text: 'React', status: 'active', editing: false },
     { id: 2, text: 'Redux', status: 'active', editing: false },
-    { id: 3, text: 'Mutable', status: 'active', editing: false },
+    { id: 3, text: 'Vanilla', status: 'active', editing: false },
   ],
   actives: 3,
   filter: 'all'

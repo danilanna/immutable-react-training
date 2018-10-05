@@ -1,4 +1,4 @@
-import { TODOS } from './mutableTypes';
+import { TODOS } from './vanillaTypes';
 
 export const toggleComplete = (itemId) => {
   return {
