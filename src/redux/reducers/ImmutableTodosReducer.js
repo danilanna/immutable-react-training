@@ -3,18 +3,16 @@ import { TODOS } from '../actions/immutableTypes';
 
 const INITIAL_STATE = fromJS({
     todos: [
-      Map({id: 1, text: 'React', status: 'active', editing: false}),
-      Map({id: 2, text: 'Redux', status: 'active', editing: false}),
-      Map({id: 3, text: 'Immutable', status: 'active', editing: false}),
+      {id: 1, text: 'React', status: 'active', editing: false},
+      {id: 2, text: 'Redux', status: 'active', editing: false},
+      {id: 3, text: 'Immutable', status: 'active', editing: false},
     ],
     actives: 3,
     filter: 'all'
 });
 
 const findItemIndex = (state, itemId) => {
-  return state.get('todos').findIndex(
-    (item) => item.get('id') === itemId
-  );
+  return state.get('todos').findIndex((item) => item.get('id') === itemId);
 }
 
 const getItem = (state, itemIndex) => {
@@ -28,10 +26,11 @@ const updateTodos = (state, itemIndex, updatedItem) => {
 const toggleComplete = (state, itemId) => {
   const itemIndex =  findItemIndex(state, itemId);
   const item = getItem(state, itemIndex);
-  const isActive = item.get('status') === 'active' ;
-  const actives = state.get('actives');
-  const newState = state.set('actives', isActive ? actives -1 : actives +1);
+  
+  const isActive = item.get('status') === 'active';
+  const newState = state.update('actives', actives => isActive ? actives -1 : actives +1);
   const updatedItem = item.set('status', isActive ? 'completed' : 'active');
+  
   return updateTodos(newState, itemIndex, updatedItem);
 }
 
@@ -74,20 +73,22 @@ const clearCompleted = (state) => {
 const addItem = (state, text) => {
   const itemId = Math.floor((1 + Math.random()) * 0x10000);
   const newItem = Map({id: itemId, text: text, status: 'active'});
-  const actives = state.get('actives');
-  return state.update('todos', todos => 
-    todos.push(newItem))
-    .set('actives', actives +1);
+  return state.update('todos', todos => todos.push(newItem))
+    .update('actives', actives => actives +1);
 }
 
 const deleteItem = (state, itemId) => {
-  const actives = state.get('actives');
-  return state.update('todos',(todos) => 
-      todos.filterNot((item) => 
-        item.get('id') === itemId
-      )
-    )
-    .set('actives', actives -1);
+  const itemIndex = findItemIndex(state, itemId);
+  const deletedItem = getItem(state, itemIndex);
+
+  const newState = state.update('todos', todos => todos.remove(itemIndex));
+
+  if (deletedItem.get('status') !== 'completed') {
+    return newState.update('actives', actives => actives -1);
+  }
+
+  return newState;
+
 }
 
 export default (state = INITIAL_STATE, action) => {

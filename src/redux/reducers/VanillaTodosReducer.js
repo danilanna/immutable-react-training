@@ -78,11 +78,19 @@ const addItem = (state, text) => {
 }
 
 const deleteItem = (state, itemId) => {
-  const newTodos = [...state.todos.filter(
-    (item) => item.id !== itemId
-  )];
-  const actives = state.actives;
-  return {...state, todos: newTodos, actives: actives -1};
+
+  const itemIndex = findItemIndex(state, itemId);
+  const deletedItem = getItem(state, itemIndex);
+
+  const newTodos = [...state.todos];
+  newTodos.splice(itemIndex, 1);
+
+  if (deletedItem.status !== 'completed') {
+    return {...state, todos: newTodos, actives: state.actives -1};
+  }
+
+  return {...state, todos: newTodos};
+
 }
 
 export default (state = INITIAL_STATE, action) => {
