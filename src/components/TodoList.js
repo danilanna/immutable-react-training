@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { isImmutable } from 'immutable';
 import TodoItem from './TodoItem';
 
 export default class TodoList extends PureComponent {
@@ -8,27 +7,10 @@ export default class TodoList extends PureComponent {
     const todos = this.props.todos;
     if (todos) {
         return todos.filter((item) => 
-            this.props.filter === 'all' || (isImmutable(todos) ? item.get('status') : item.status) === this.props.filter
+            this.props.filter === 'all' || item.status === this.props.filter
         );
     }
     return [];
-  }
-
-  isCompleted(item) {
-      const status = isImmutable(item) ? item.get('status') : item.status;
-      return status === 'completed';
-  }
-
-  getId(item) {
-    return isImmutable(item) ? item.get('id') : item.id;
-  }
-
-  getText(item) {
-    return isImmutable(item) ? item.get('text') : item.text;
-  }
-
-  isEditing(item) {
-    return isImmutable(item) ? item.get('editing') : item.editing;
   }
 
   render() {
@@ -36,11 +18,11 @@ export default class TodoList extends PureComponent {
     <section className="main">
       <ul className="todo-list">
         {this.getItems().map(item =>
-          <TodoItem key={this.getId(item)}
-                    id={this.getId(item)}
-                    text={this.getText(item)}
-                    isEditing={this.isEditing(item)}
-                    isCompleted={this.isCompleted(item)}
+          <TodoItem key={item.id}
+                    id={item.id}
+                    text={item.text}
+                    isEditing={item.editing}
+                    isCompleted={item.status === 'completed'}
                     doneEditing={this.props.doneEditing}
                     cancelEditing={this.props.cancelEditing}
                     toggleComplete={this.props.toggleComplete}
