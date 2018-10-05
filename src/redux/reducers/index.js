@@ -1,7 +1,7 @@
-import MutableUserReducer from "./MutableUserReducer";
-import ImmutableUserReducer from "./ImmutableUserReducer";
+import ImmutableTodosReducer from "./ImmutableTodosReducer";
+import MutableTodosReducer from "./MutableTodosReducer";
 
 export default {
-  mutable: MutableUserReducer,
-  immutable: ImmutableUserReducer,
+  immutable: ImmutableTodosReducer,
+  mutable: MutableTodosReducer,
 };
