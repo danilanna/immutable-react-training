@@ -22,7 +22,6 @@ function mapStateToProps(state) {
   return {
     todos: state.immutable.get('todos'),
     filter: state.immutable.get('filter'),
-    actives: state.immutable.get('actives'),
   };
 }
 

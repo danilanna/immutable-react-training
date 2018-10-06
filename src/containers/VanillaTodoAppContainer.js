@@ -22,7 +22,6 @@ function mapStateToProps(state) {
   return {
     todos: state.vanilla.todos,
     filter: state.vanilla.filter,
-    actives: state.vanilla.actives
   };
 }
 
