@@ -52,4 +52,11 @@ const INITIAL_STATE = {
 window.state = INITIAL_STATE;
 window.Immutable = Immutable;
 
+const immutableState = Immutable.fromJS(window.state);
+const newState = immutableState.set('name', 'Daniel')
+.setIn(['company', 'name'], 'Disney Pixar')
+.update('minions', minions => minions.set(1, 'Daniel'));
+
+console.log(newState);
+
 export default App;
