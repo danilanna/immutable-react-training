@@ -12,11 +12,44 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
+        <div>
+          <p>Can you convert the "state" object in WINDOW to an Immutable.js object?</p>
+          <ul>Remember:
+            <li>
+              The object to convert is present in WINDOW global object as "state".
+            </li>
+            <li>
+              Immutable library is in WINDOW global object as "Immutable", so open your console and start using it!
+            </li>
+            <li>
+              fromJS({}) is useful to convert a plain javascript object to an immutable.js object
+            </li>
+            <li>
+              Object {} becomes Map({})
+              Array [] becomes List([]);
+            </li>
+            <li>
+              Immutable methods get and set are used for getting and setting a shallow properties
+            </li>
+            <li>
+              Immutable methods getIn and setIn are used for getting and setting a deep properties
+            </li>
+          </ul>
+        </div>
       </div>
     );
   }
 }
 
+const INITIAL_STATE = {
+  name: 'Daniel',
+  location: {
+      state: 'MG',
+      city: 'BH',
+  },
+};
+
+window.state = INITIAL_STATE;
 window.Immutable = Immutable;
 
 export default App;
