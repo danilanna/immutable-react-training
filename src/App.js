@@ -1,65 +1,63 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import logo from './logo.svg';
+import * as Immutable from 'immutable';
+import img from './logo.svg';
 import './App.css';
-import { setMutableName, updateMutableDeep, setImmutableName, updateImmutableDeep } from './redux/actions/actions';
+import { setVanillaName, updateVanillaDeep, setImmutableName, updateImmutableDeep } from './redux/actions/actions';
 
 class App extends Component {
 
   render() {
-    console.log('render again!');
-    const {mutable} = this.props;
+    const {vanilla} = this.props;
     const {immutable} = this.props;
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <img src={img} className="App-logo" alt="Logo"></img>
+          <h1>Immutable Trainning</h1>
         </header>
-        <h2>Mutable</h2>
-        <p className="App-intro">
-          Name: {mutable.name}, <br/>
-          Location: {mutable.location}, <br/>
-          Foo: {mutable.foo.bar}, <br/>
-          Baz: {mutable.foo.baz}, <br/>
-          list: {
-            mutable.list.map((val) => {
-              return (<span key={val}>{val}</span>)
-            })
-          }
-        </p>
-        <h2>Immutable</h2>
-        <p className="App-intro">
-          Name: {immutable.get('name')}, <br/>
-          Location: {immutable.get('location')}, <br/>
-          Foo: {immutable.getIn(['foo', 'bar'])}, <br/>
-          Baz: {immutable.getIn(['foo', 'baz'])}, <br/>
-          list: {
-            immutable.get('list').map((val) => {
-              return (<span key={val}>{val}</span>)
-            })
-          }
-        </p>
-        <button onClick={this.props.setMutableName}>Set Name - Mutable</button>
-        <button onClick={this.props.updateMutableDeep}>Update - Mutable</button>
-        <button onClick={this.props.setImmutableName}>Set Name - Immutable</button>
-        <button onClick={this.props.updateImmutableDeep}>Update - Immutable</button>
+
+        <div>
+
+          <h2>Vanilla JS</h2>
+          
+          <p className="App-intro">
+            Name: {vanilla.name}, <br/>
+            State: {vanilla.location.state}, <br/>
+            City: {vanilla.location.city} <br/>
+          </p>
+          
+          <h2>Immutable.js</h2>
+          
+          <p className="App-intro">
+            Name: {immutable.get('name')}, <br/>
+            State: {immutable.getIn(['location', 'state'])}, <br/>
+            City: {immutable.getIn(['location', 'city'])} <br/>
+          </p>
+          
+          <button onClick={this.props.setVanillaName} id="vanillaName">Update Name - Vanilla</button>
+          <button onClick={this.props.updateVanillaDeep} id="vanillaDeep">Update State - Vanilla</button>
+          <button onClick={this.props.setImmutableName} id="immutableName">Update Name - Immutable</button>
+          <button onClick={this.props.updateImmutableDeep} id="immutableDeep">Update State - Immutable</button>
+        </div>
       </div>
     );
   }
 }
 
+window.Immutable = Immutable;
+
 const mapStateToProps = state => ({
-  mutable: state.mutable,
+  vanilla: state.vanilla,
   immutable: state.immutable
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      setMutableName: (evt) => dispatch(setMutableName('Mutable Daniel')),
-      updateMutableDeep: (evt) => dispatch(updateMutableDeep('Mutable Deep bar')),
-      setImmutableName: (evt) => dispatch(setImmutableName('Immutable Daniel')),
-      updateImmutableDeep: (evt) => dispatch(updateImmutableDeep('Immutable Deep bar')),
+      setVanillaName: () => dispatch(setVanillaName('Daniel Lanna')),
+      updateVanillaDeep: () => dispatch(updateVanillaDeep('Minas Gerais')),
+      setImmutableName: () => dispatch(setImmutableName('Daniel Lanna')),
+      updateImmutableDeep: () => dispatch(updateImmutableDeep('Minas Gerais')),
   };
 }
 
