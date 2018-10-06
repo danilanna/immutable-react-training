@@ -42,11 +42,11 @@ class App extends Component {
 }
 
 const INITIAL_STATE = {
-  name: 'Daniel',
-  location: {
-      state: 'MG',
-      city: 'BH',
+  name: 'Gru',
+  company: {
+    name: 'Disney',
   },
+  minions: ["Kevin", "Stuart", "Bob"]
 };
 
 window.state = INITIAL_STATE;
