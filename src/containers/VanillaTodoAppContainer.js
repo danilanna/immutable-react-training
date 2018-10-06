@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../redux/actions/vanillaActions';
-import TodoList from '../components/TodoList'
-import TodoHeader from '../components/TodoHeader'
-import TodoTools from '../components/TodoTools'
-import Footer from '../components/Footer'
+import TodoList from '../components/TodoList';
+import TodoHeader from '../components/TodoHeader';
+import TodoTools from '../components/TodoTools';
 
 class TodoApp extends Component {
 
@@ -15,7 +14,6 @@ class TodoApp extends Component {
         <TodoList {...this.props} />
         <TodoTools changeFilter={this.props.changeFilter} filter={this.props.filter} quantityActiveItems={this.props.actives} clearCompleted={this.props.clearCompleted}/>
       </section>
-      <Footer />
     </div>
   }
 };
