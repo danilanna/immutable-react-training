@@ -20,9 +20,8 @@ class TodoApp extends Component {
 
 function mapStateToProps(state) {
   return {
-    todos: state.immutable.get('todos'),
-    filter: state.immutable.get('filter'),
-    actives: state.immutable.get('actives'),
+    todos: state.immutable.todos,
+    filter: state.immutable.filter,
   };
 }
 
