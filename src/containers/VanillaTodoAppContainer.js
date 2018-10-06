@@ -12,7 +12,7 @@ class TodoApp extends Component {
       <section className="todoapp">
         <TodoHeader addItem={this.props.addItem}/>
         <TodoList {...this.props} />
-        <TodoTools changeFilter={this.props.changeFilter} filter={this.props.filter} quantityActiveItems={this.props.actives} clearCompleted={this.props.clearCompleted}/>
+        <TodoTools changeFilter={this.props.changeFilter} filter={this.props.filter} clearCompleted={this.props.clearCompleted}/>
       </section>
     </div>
   }

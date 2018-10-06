@@ -10,9 +10,6 @@ export default class TodoTools extends PureComponent {
   render() {
     return (
     <footer className="footer">
-      <span className="todo-count">
-        <strong>{this.props.quantityActiveItems || 0}</strong> items left
-      </span>
       <ul className="filters">
         <li>
             <a href="/#" onClick={(evt) => {evt.preventDefault(); this.props.changeFilter('all')}} className={this.setSelectedClass('all')}>

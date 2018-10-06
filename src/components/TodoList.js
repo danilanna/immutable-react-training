@@ -27,10 +27,6 @@ export default class TodoList extends PureComponent {
     return isImmutable(item) ? item.get('text') : item.text;
   }
 
-  isEditing(item) {
-    return isImmutable(item) ? item.get('editing') : item.editing;
-  }
-
   render() {
     return (
     <section className="main">
@@ -39,10 +35,7 @@ export default class TodoList extends PureComponent {
           <TodoItem key={this.getId(item)}
                     id={this.getId(item)}
                     text={this.getText(item)}
-                    isEditing={this.isEditing(item)}
                     isCompleted={this.isCompleted(item)}
-                    doneEditing={this.props.doneEditing}
-                    cancelEditing={this.props.cancelEditing}
                     toggleComplete={this.props.toggleComplete}
                     deleteItem={this.props.deleteItem}
                     editItem={this.props.editItem}/>
