@@ -38,7 +38,7 @@ const toggleComplete = (state, itemId) => {
 
 const changeFilter = (state, filter) => {
   state.filter = filter;
-  return state;
+  return { ...state, filter }
 }
 
 const editItem = (state, itemId) => {
@@ -73,10 +73,11 @@ const addItem = (state, text) => {
   const itemId = Math.floor((1 + Math.random()) * 0x10000);
   const newItem = { id: itemId, text: text, status: 'active' };
 
-  state.actives++;
-  state.todos.push(newItem);
+  const actives = state.actives;
+  const newState = { ...state, todos: [...state.todos], actives: actives +1 };
   
-  return state;
+  newState.todos.push(newItem);
+  return newState;
 }
 
 const deleteItem = (state, itemId) => {
